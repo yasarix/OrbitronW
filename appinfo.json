@@ -1,5 +1,8 @@
 {
-    "appKeys": {},
+    "appKeys": {
+        "KEY_CONDITIONS": 1,
+        "KEY_TEMPERATURE": 0
+    },
     "capabilities": [
         "location"
     ],
@@ -9,13 +12,13 @@
     "resources": {
         "media": [
             {
-                "file": "fonts/Raleway-Bold.ttf",
-                "name": "FONT_RALEWAY_14",
+                "file": "fonts/Orbitron-Medium.ttf",
+                "name": "FONT_ORBITRON_40",
                 "type": "font"
             },
             {
-                "file": "fonts/Orbitron-Medium.ttf",
-                "name": "FONT_ORBITRON_40",
+                "file": "fonts/Raleway-Bold.ttf",
+                "name": "FONT_RALEWAY_14",
                 "type": "font"
             }
         ]
