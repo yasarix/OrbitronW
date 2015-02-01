@@ -12,6 +12,12 @@
     "resources": {
         "media": [
             {
+                "file": "images/icon.png",
+                "menuIcon": true,
+                "name": "IMAGE_ICON",
+                "type": "png"
+            },
+            {
                 "file": "fonts/Orbitron-Medium.ttf",
                 "name": "FONT_ORBITRON_40",
                 "type": "font"
