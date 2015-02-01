@@ -1,0 +1,30 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        "location"
+    ],
+    "companyName": "Yasar Senturk",
+    "longName": "Orbitron W",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "fonts/Raleway-Bold.ttf",
+                "name": "FONT_RALEWAY_14",
+                "type": "font"
+            },
+            {
+                "file": "fonts/Orbitron-Medium.ttf",
+                "name": "FONT_ORBITRON_40",
+                "type": "font"
+            }
+        ]
+    },
+    "shortName": "Orbitron W",
+    "uuid": "2589b3f7-3614-4c4b-90af-e166a8d9860d",
+    "versionCode": 1,
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": true
+    }
+}
