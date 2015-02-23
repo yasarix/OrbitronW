@@ -117,7 +117,7 @@ static void main_window_load(Window *window) {
     s_small_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_RALEWAY_14));
     
     // Time layer
-    s_time_layer = text_layer_create(GRect(0, 55, 144, 50));
+    s_time_layer = text_layer_create(GRect(0, 60, 144, 50));
     text_layer_set_background_color(s_time_layer, GColorBlack);
     text_layer_set_text_color(s_time_layer, GColorWhite);
     text_layer_set_text(s_time_layer, "00:00");
@@ -139,15 +139,15 @@ static void main_window_load(Window *window) {
     text_layer_set_text_alignment(s_day_layer, GTextAlignmentRight);
     
     // Weather layer
-    s_weather_layer = text_layer_create(GRect(0, 10, 144, 25));
+    s_weather_layer = text_layer_create(GRect(0, 5, 144, 25));
     text_layer_set_background_color(s_weather_layer, GColorClear);
     text_layer_set_text_color(s_weather_layer, GColorWhite);
     text_layer_set_font(s_weather_layer, s_medium_font);
     text_layer_set_text_alignment(s_weather_layer, GTextAlignmentRight);
-    text_layer_set_text(s_weather_layer, "Loading...");
+    text_layer_set_text(s_weather_layer, ".");
     
     // Location layer
-    s_location_layer = text_layer_create(GRect(0, 25, 144, 25));
+    s_location_layer = text_layer_create(GRect(0, 20, 144, 25));
     text_layer_set_background_color(s_location_layer, GColorClear);
     text_layer_set_text_color(s_location_layer, GColorWhite);
     text_layer_set_font(s_location_layer, s_small_font);

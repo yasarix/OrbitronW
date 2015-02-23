@@ -23,44 +23,81 @@ var xhrRequest = function (url, type, callback) {
 };
 
 function locationSuccess(pos) {
-    // We will request the weather here
-    var url = "http://api.openweathermap.org/data/2.5/weather?lat=" +
-                pos.coords.latitude + "&lon=" + pos.coords.longitude;
-
-    // Send request to OpenWeatherMap
-    xhrRequest(url, 'GET', 
+    var locationUrl = "http://nominatim.openstreetmap.org/reverse?format=json&lat=" + 
+                        pos.coords.latitude + 
+                        "&lon=" + pos.coords.longitude + "&zoom=18&addressdetails=1";
+    xhrRequest(locationUrl, 'GET', 
         function(responseText) {
             // responseText contains a JSON object with weather info
             var json = JSON.parse(responseText);
+            console.log("Response: " + responseText);
+            
+            var locationString = "";
+            
+            if (json.address.hasOwnProperty('village')) {
+                locationString += json.address.village;
+            }
+            
+            if (json.address.hasOwnProperty('neighbourhood')) {
+                locationString += json.address.neighbourhood + " ";
+            }
+            
+            if (json.address.hasOwnProperty('town')) {
+                locationString += json.address.town + " ";
+            }
+            
+            if (json.address.hasOwnProperty('county')) {
+                locationString += json.address.county + " ";
+            }
+            
+            if (json.address.hasOwnProperty('city')) {
+                locationString = json.address.city + " ";
+            }
+            
+            console.log("Location string: " + locationString);
+            
+            var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + encodeURIComponent(locationString);
 
-            // Temperature in Kelvin requires adjustment
-            var temperature = Math.round(json.main.temp - 273.15);
-            console.log("Temperature: " + temperature);
+            // Send request to OpenWeatherMap
+            xhrRequest(weatherUrl, 'GET', 
+                function(responseText) {
+                    // responseText contains a JSON object with weather info
+                    var json = JSON.parse(responseText);
 
-            // Conditions
-            var conditions = json.weather[0].main;
-            console.log("Conditions: " + conditions);
+                    console.log("Response: " + responseText);
 
-            // Location name
-            var location_name = json.name;
-            console.log("Location name: " + location_name);
-        
-            var dictionary = {
-                "KEY_TEMPERATURE": temperature,
-                "KEY_CONDITIONS": conditions,
-                "KEY_LOCATION_NAME": location_name
-            };
+                    // Temperature in Kelvin requires adjustment
+                    var temperature = Math.round(json.main.temp - 273.15);
+                    console.log("Temperature: " + temperature);
 
-            // Send to Pebble
-            Pebble.sendAppMessage(dictionary,
-                function(e) {
-                    console.log("Weather info sent to Pebble successfully!");
-                },
-                function(e) {
-                    console.log("Error sending weather info to Pebble!");
-                });
+                    // Conditions
+                    var conditions = json.weather[0].main;
+                    console.log("Conditions: " + conditions);
+
+                    // Location name
+                    var locationName = json.name;
+                    console.log("Location name: " + locationName);
+
+                    var dictionary = {
+                        "KEY_TEMPERATURE": temperature,
+                        "KEY_CONDITIONS": conditions,
+                        "KEY_LOCATION_NAME": locationName
+                    };
+
+                    // Send to Pebble
+                    Pebble.sendAppMessage(dictionary,
+                        function(e) {
+                            console.log("Weather info sent to Pebble successfully!");
+                        },
+                        function(e) {
+                            console.log("Error sending weather info to Pebble!");
+                        });
+                }
+            );
         }
     );
+
+    
 }
 
 function locationError(err) {
