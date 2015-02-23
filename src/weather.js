@@ -26,6 +26,9 @@ function locationSuccess(pos) {
     var locationUrl = "http://nominatim.openstreetmap.org/reverse?format=json&lat=" + 
                         pos.coords.latitude + 
                         "&lon=" + pos.coords.longitude + "&zoom=18&addressdetails=1";
+
+    console.log("locationUrl: " + locationUrl);
+    
     xhrRequest(locationUrl, 'GET', 
         function(responseText) {
             // responseText contains a JSON object with weather info
@@ -47,17 +50,24 @@ function locationSuccess(pos) {
             }
             
             if (json.address.hasOwnProperty('county')) {
-                locationString += json.address.county + " ";
+                locationString += json.address.county;
             }
             
             if (json.address.hasOwnProperty('city')) {
-                locationString = json.address.city + " ";
+                locationString = json.address.city;
+            }
+            
+            if (json.address.hasOwnProperty('country')) {
+                console.log("We have country info");
+                locationString += " "+json.address.country;
             }
             
             console.log("Location string: " + locationString);
             
             var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + encodeURIComponent(locationString);
 
+            console.log("weatherUrl: " + weatherUrl);
+            
             // Send request to OpenWeatherMap
             xhrRequest(weatherUrl, 'GET', 
                 function(responseText) {
