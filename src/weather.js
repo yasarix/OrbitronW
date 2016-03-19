@@ -23,7 +23,7 @@ var xhrRequest = function (url, type, callback) {
 };
 
 function locationSuccess(pos) {
-    var locationUrl = "http://nominatim.openstreetmap.org/reverse?format=json&lat=" + 
+    var locationUrl = "http://nominatim.openstreetmap.org/reverse?APPID=3b091c12a3f6fc9835ef4a067c42ca0b&format=json&lat=" + 
                         pos.coords.latitude + 
                         "&lon=" + pos.coords.longitude + "&zoom=18&addressdetails=1";
 
@@ -64,7 +64,7 @@ function locationSuccess(pos) {
             
             console.log("Location string: " + locationString);
             
-            var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + encodeURIComponent(locationString);
+            var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?APPID=3b091c12a3f6fc9835ef4a067c42ca0b&q=" + encodeURIComponent(locationString);
 
             console.log("weatherUrl: " + weatherUrl);
             
